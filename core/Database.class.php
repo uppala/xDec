@@ -1,13 +1,6 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:39 PM
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
+
 /**
  * Class Database
  * @package xDec

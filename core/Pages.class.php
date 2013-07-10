@@ -1,13 +1,6 @@
 <?php
-/**
- * Developer: Rahul Kadyan
- * Date: 16/05/13
- * Time: 3:40 PM
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
+//TODO  re-consider this class too
 class Pages {
     private function start_head(){
         echo '<!DOCTYPE html>

@@ -1,16 +1,22 @@
 <?php
+if(!defined('xDEC')) exit;
+//TODO Need re-consideration
 /**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:52 PM
+ * Class Extension
  */
-if(!defined('xDEC')){
-    echo "indirect access";
-exit;
-}
 class Extension {
+    /**
+     * @var
+     */
     private $extensions;
+    /**
+     * @var
+     */
     private $namespaces;
+
+    /**
+     *
+     */
     public function load(){
         $this->extensions = array();
         $this->namespaces = array();
@@ -32,6 +38,10 @@ class Extension {
             }
         }
     }
+
+    /**
+     *
+     */
     public function head_start(){
         foreach($this->extensions as $ext){
             if(isset($ext['data']['head_start']) && function_exists($ext['data']['namespace'].$ext['data']['head_start'])){
@@ -39,6 +49,10 @@ class Extension {
             }
         }
     }
+
+    /**
+     *
+     */
     public function head_end(){
         foreach($this->extensions as $ext){
             if(isset($ext['data']['head_end']) && function_exists($ext['data']['namespace'].$ext['data']['head_end'])){
@@ -46,6 +60,10 @@ class Extension {
             }
         }
     }
+
+    /**
+     *
+     */
     public function body_start(){
         foreach($this->extensions as $ext){
             if(isset($ext['data']['body_start']) && function_exists($ext['data']['namespace'].$ext['data']['body_start'])){
@@ -53,6 +71,10 @@ class Extension {
             }
         }
     }
+
+    /**
+     *
+     */
     public function body_end(){
         foreach($this->extensions as $ext){
             if(isset($ext['data']['body_end']) && function_exists($ext['data']['namespace'].$ext['data']['body_end'])){

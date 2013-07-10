@@ -1,4 +1,5 @@
 <?php
+if(!defined('xDEC')) exit;
 $core = array('Auth', 'Cache', 'Cookie', 'Database', 'Extension', 'Logger', 'Mail', 'Modal', 'Pages', 'Router', 'Security', 'Session');
 $namespace = '';
 

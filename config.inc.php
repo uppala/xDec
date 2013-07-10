@@ -16,6 +16,7 @@ define('DB_USER','root');
 define('DB_PASS','xEffect');
 define('DB_NAME','man');
 define('DB_PORT',3306);
+define('DB_ENABLED', true);
 
 //DEV mode
 define('LOG_DB_QUERY', true);

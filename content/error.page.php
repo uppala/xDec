@@ -9,7 +9,12 @@
 
 
 class error implements Page{
-    function __head__()
+    function __meta__($var)
+    {
+        // TODO: Implement __meta__() method.
+    }
+
+    function __head__($var)
     {
 
     }

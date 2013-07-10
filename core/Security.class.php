@@ -1,15 +1,8 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:52 PM
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
 class Security {
     //TODO clean is for sql filtering
+    //TODO add more security to framework and remove sql cleaning from here
     public function clean($str){
         return addslashes(strip_tags(htmlspecialchars($str)));
     }

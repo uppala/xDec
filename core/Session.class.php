@@ -1,13 +1,6 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 8:05 PM
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
+//TODO better session management than just adding user to session variable
 class Session {
     public function user(){
         if(isset($_SESSION['xDecUSER']))

@@ -1,13 +1,6 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 12:06 PM
- */
-if(!defined('xDEC')){
-    echo "r indirect access".$_SERVER['PHP_SELF'];
-    exit;
-}
+if(!defined('xDEC')) exit;
+//TODO add access limit to registry
 /**
  * Class Registry
  * @package xDec

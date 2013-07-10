@@ -1,7 +1,12 @@
 <?php
 if(!defined('xDEC')) exit;
-
+/**
+ * Class Cookie
+ */
 class Cookie {
+    /**
+     * @return bool
+     */
     public function login(){
         var_dump($_COOKIE);
         if(isset($_COOKIE['session_id']))
@@ -15,10 +20,17 @@ class Cookie {
         return false;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setCookie($key, $value){
         setcookie($key, $value, time()+7*24*60*60, DIR.'/', BASE_URL, true);
     }
 
+    /**
+     * @param $key
+     */
     public function removeCookie($key){
         setcookie($key, null, time()-1, null, null, true);
     }

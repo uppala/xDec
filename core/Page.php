@@ -1,15 +1,8 @@
 <?php
-/**
- * Developer: Rahul Kadyan
- * Date: 16/05/13
- * Time: 3:58 PM
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
 interface Page{
-    function __head__();
+    function __head__($var);
     function __title__($var);
     function index($var);
+    function __meta__($var);
 }

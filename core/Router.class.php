@@ -1,14 +1,6 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 12:50 PM
- * @dependency constant CONTENT and registry must be set first; uses functions get() and set() for accessing registry
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
+//TODO add different kind of url support
 /**
  * Class Router
  * @package xDec

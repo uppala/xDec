@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd4b695b-027e-4f36-b9c8-abb40c6de146" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Auth.class.php" afterPath="$PROJECT_DIR$/core/Auth.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Cache.class.php" afterPath="$PROJECT_DIR$/core/Cache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Cookie.class.php" afterPath="$PROJECT_DIR$/core/Cookie.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Database.class.php" afterPath="$PROJECT_DIR$/core/Database.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Extension.class.php" afterPath="$PROJECT_DIR$/core/Extension.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Function.php" afterPath="$PROJECT_DIR$/core/Function.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Logger.class.php" afterPath="$PROJECT_DIR$/core/Logger.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Mail.class.php" afterPath="$PROJECT_DIR$/core/Mail.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Modal.class.php" afterPath="$PROJECT_DIR$/core/Modal.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Page.php" afterPath="$PROJECT_DIR$/core/Page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Pages.class.php" afterPath="$PROJECT_DIR$/core/Pages.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Registry.class.php" afterPath="$PROJECT_DIR$/core/Registry.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Router.class.php" afterPath="$PROJECT_DIR$/core/Router.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Security.class.php" afterPath="$PROJECT_DIR$/core/Security.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/Session.class.php" afterPath="$PROJECT_DIR$/core/Session.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap.php" afterPath="$PROJECT_DIR$/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.inc.php" afterPath="$PROJECT_DIR$/config.inc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/error.page.php" afterPath="$PROJECT_DIR$/content/error.page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/index.php" afterPath="$PROJECT_DIR$/core/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="dd4b695b-027e-4f36-b9c8-abb40c6de146" name="Default" comment="" />
     <ignored path="xDec v1 beta.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="dd4b695b-027e-4f36-b9c8-abb40c6de146" time="1373459435035" ignored="false" />

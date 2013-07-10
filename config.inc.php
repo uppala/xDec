@@ -1,9 +1,4 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:01 PM
- */
 //Directories
 define('BASE', dirname(__FILE__).'/');
 define('CORE', BASE.'core/');

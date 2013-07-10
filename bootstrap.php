@@ -1,10 +1,4 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 4:04 PM
- */
-
 $core = array('Auth', 'Cache', 'Cookie', 'Database', 'Extension', 'Logger', 'Mail', 'Modal', 'Pages', 'Router', 'Security', 'Session');
 $namespace = '';
 

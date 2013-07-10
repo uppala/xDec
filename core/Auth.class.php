@@ -1,15 +1,5 @@
 <?php
-if(!defined('xDEC')){
-    //header("Location: http://".$_SERVER['HTTP_HOST']);
-    echo "script access deny";
-    exit;
-}
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:52 PM
- */
-
+if(!defined('xDEC')) exit;
 /**
  * Class Auth
  * Provides basic authentication

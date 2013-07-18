@@ -1,7 +1,5 @@
 <?php
 if(!defined('xDEC')) exit;
-//TODO add advanced authentication techniques
-//TODO remove dependency on Database class
 /**
  * Class Auth
  * Provides basic authentication

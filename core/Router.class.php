@@ -16,7 +16,7 @@ class Router
         $uri = substr($uri, strlen(DIR));
         $segments = explode('/',trim($uri, '/'));
         switch(count($segments)){
-            case 0: set('page', 'home'); set('request', 'index'); break;
+            case 0: set('page', HOME_CLASS); set('request', 'index'); break;
             case 1: if($segments[0] == ''){
                         set('page', HOME_CLASS); set('request', 'index');
                     } else {
@@ -64,14 +64,14 @@ class Router
 
     public function body(){
         $method = $this->method;
-        if($this->class instanceof Page)
+        if(in_array("Page", class_implements($this->class)))
             $this->class->$method(get('vars'));
         else {
             if($this->class->allowed($method, $_SESSION['user_permissions']))
                 $this->class->$method(get('vars'));
             else {
                 $c = new error();
-                $c->_503($var);
+                $c->_503(get('vars'));
             }
         }
     }

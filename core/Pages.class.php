@@ -10,7 +10,7 @@ class Pages {
                     <title>';
                         get('Router')->title();
               echo '</title>';
-        get('Extension')->head_start();
+        get('Extensions')->head_start();
     }
 
     private function build_head(){
@@ -18,12 +18,12 @@ class Pages {
     }
 
     private function end_head(){
-        get('Extension')->head_end();
+        get('Extensions')->head_end();
     }
 
     private function start_body(){
         echo '<body>';
-        get('Extension')->body_start();
+        get('Extensions')->body_start();
     }
 
     private function build_body(){
@@ -31,7 +31,7 @@ class Pages {
     }
 
     private function end_body(){
-        get('Extension')->body_end();
+        get('Extensions')->body_end();
         echo '</body></html>';
     }
 

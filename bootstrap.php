@@ -21,4 +21,4 @@ foreach($core as $class){
     set($class, new $_class());
 }
 
-get('Extension')->load();
+get('Extensions')->load();

@@ -27,9 +27,8 @@ class Extensions {
                 if(file_exists(EXT.$filename.'/'.$filename.'.php')){
                     require_once(EXT.$filename.'/'.$filename.'.php');
                     {
-                        if($filename instanceof Extension){
-                            $this->extensions[]['name'] = $filename;
-                            $this->extensions[]['data'] = new $filename;
+                        if(in_array('Extension', class_implements($filename))){
+                            $this->extensions[$filename] = new $filename();
                         }
                     }
                 }
@@ -42,7 +41,7 @@ class Extensions {
      */
     public function head_start(){
         foreach($this->extensions as $ext){
-            $ext['data']->head_start();
+            $ext->head_start();
         }
     }
 
@@ -51,7 +50,7 @@ class Extensions {
      */
     public function head_end(){
         foreach($this->extensions as $ext){
-            $ext['data']->head_end();
+            $ext->head_end();
         }
     }
 
@@ -60,7 +59,7 @@ class Extensions {
      */
     public function body_start(){
         foreach($this->extensions as $ext){
-            $ext['data']->body_start();
+            $ext->body_start();
         }
     }
 
@@ -69,7 +68,7 @@ class Extensions {
      */
     public function body_end(){
         foreach($this->extensions as $ext){
-            $ext['data']->body_end();
+            $ext->body_end();
         }
     }
 }

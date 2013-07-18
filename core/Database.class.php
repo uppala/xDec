@@ -13,6 +13,25 @@ class Database {
      */
     private $_connection, $_result;
 
+    private $rows_effected,
+            $insert_id;
+
+    /**
+     * @return mixed
+     */
+    public function insertId()
+    {
+        return $this->insert_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function rowsEffected()
+    {
+        return $this->rows_effected;
+    }
+
     /**
      *  Default constructor: check for database connection variables
      */
@@ -29,12 +48,14 @@ class Database {
 
     /**
      * Selects satisfying records from given table
+     * @Since Version 1.0
      * @param string $table Name of table to select from
      * @param mixed $fields Array of fields or string containing field names to select
      * @param string $condition full formatted condition without WHERE word
+     * @param mixed $args arguments to be used in condition
      * @param null $limit Number of results expected
      */
-    public function select($table, $fields, $condition, $limit = NULL){
+    public function select($table, $fields, $condition, $args, $limit = NULL){
         $limit = ( $limit == NULL ) ? '' : 'LIMIT ' . intval( $limit );
         if( is_array($fields) )
         {
@@ -43,9 +64,10 @@ class Database {
                 $f .= "`$v`,";
             $fields = substr( $f, 0, -1 );
         }
-        if( $condition != '' )
-            $condition = 'WHERE ' . $condition;
-        $select = "SELECT $fields FROM $table $condition $limit";
+        foreach($args as $var){
+            $condition = preg_replace('/\?/', (is_string($var)?get('Security')->mysql($var):$var), $condition, 1);
+        }
+        $select = "SELECT ".$fields." FROM ".$table." ".$condition." ".$limit;
         $this->_query( $select );
     }
 
@@ -74,17 +96,21 @@ class Database {
      * @param string $table Name of table
      * @param string $change Assoc array for data to change
      * @param string $condition full formatted condition without WHERE word
+     * @param mixed $args arguments to be used in condition
+     * @param int $limit number of rows to update
      */
-    public function update( $table, $change, $condition )
+    public function update( $table, $change, $condition, $args, $limit = NULL )
     {
         $update = "UPDATE {$table} SET";
         foreach( $change as $field => $value )
         {
-            $update .= "`" . $field . "`='{$value}',";
+            $update .= "`" . $field . "`=".(is_string($value)?"'".get('Security')->mysql($value)."'": $value).",";
         }
         $update = substr( $update, 0, -1 );
-        $condition = ( $condition == '' ) ? '' : " WHERE " . $condition;
-        $update .= $condition;
+        foreach($args as $var){
+            $condition = preg_replace('/\?/', (is_string($var)?get('Security')->mysql($var):$var), $condition, 1);
+        }
+        $update .=" ".$condition. (is_int($limit)?' LIMIT 0, '.$limit: '');
         $this->_query( $update );
     }
 
@@ -92,12 +118,15 @@ class Database {
      * Deletes a record from given table
      * @param string $table Name of table
      * @param string $condition full formatted condition without WHERE word
+     * @param mixed $args arguments to be used in condition
      * @param string $limit Number of expected deletions
      */
-    public function delete( $table, $condition, $limit = '')
+    public function delete( $table, $condition, $args, $limit = NULL)
     {
-        $limit = ( $limit == '' ) ? '' : ' LIMIT ' . intval( $limit );
-        $delete = "DELETE FROM {$table} WHERE {$condition} {$limit}";
+        foreach($args as $var){
+            $condition = preg_replace('/\?/', (is_string($var)?get('Security')->mysql($var):$var), $condition, 1);
+        }
+        $delete = "DELETE FROM ".$table." ".$condition.(is_int($limit)? ' LIMIT 0, '.$limit: '');
         $this->_query( $delete );
     }
 
@@ -119,6 +148,11 @@ class Database {
         return null;
     }
 
+    public function num_rows(){
+        if($this->_result)
+            return $this->_result->num_rows;
+    }
+
     /**
      * Public interface for _query
      * @param string $str query string
@@ -136,9 +170,12 @@ class Database {
         $this->connect();
         if(defined('LOG_DB_QUERY') && LOG_DB_QUERY) get('Logger')->custom_log('db.log', $str);
         $this->_result = $this->_connection->query($str);
-        if($this->_connection->errno){
+        if(!$this->_result){
             trigger_error($this->_connection->error, E_USER_NOTICE);
         }
+        $this->rows_effected = $this->_connection->affected_rows;
+        $this->insert_id = $this->_connection->insert_id;
+        $this->close();
     }
 
     /**
@@ -150,21 +187,12 @@ class Database {
             trigger_error($this->_connection->error, E_USER_ERROR);
         }
     }
-    public function noerror(){
-        return is_object($this->_result);
-    }
     /**
      * Closes the active MySQL connection
      */
     private function close(){
         if($this->_connection instanceof mysqli)
             $this->_connection->close();
-    }
-
-    public function affected_rows(){
-        if($this->_connection instanceof mysqli)
-        return $this->_connection->affected_rows;
-        else return 0;
     }
 
     /**

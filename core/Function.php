@@ -86,3 +86,7 @@ function directory_size($directory) {
     @closedir($dh);
     return $directorySize;
 }
+
+function quot($str){
+    return '`'.$str.'`';
+}

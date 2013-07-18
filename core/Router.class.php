@@ -1,6 +1,5 @@
 <?php
 if(!defined('xDEC')) exit;
-//TODO add different kind of url support
 /**
  * Class Router
  * @package xDec
@@ -25,8 +24,7 @@ class Router
                     } break;
             case 2: set('page', $segments[0]); set('request', $segments[1]); break;
             default: set('page', $segments[0]); set('request', $segments[1]);
-                        //TODO replace with security class once done
-                     set('vars', addslashes(strip_tags(htmlspecialchars(urldecode(substr($uri, strlen('/'.$segments[0].'/'.$segments[1].'/'))))))); break;
+                     set('vars', urldecode(substr($uri, strlen('/'.$segments[0].'/'.$segments[1].'/')))); break;
         }
         set('uri', BASE_URL.$_SERVER['REQUEST_URI']);
     }

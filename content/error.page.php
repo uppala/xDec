@@ -1,17 +1,7 @@
 <?php
-/**
- * Developer: Rahul Kadyan
- * Date: 16/05/13
- * Time: 3:34 PM
- */
-
-//namespace x;
-
-
 class error implements Page{
     function __meta__($var)
     {
-        // TODO: Implement __meta__() method.
     }
 
     function __head__($var)

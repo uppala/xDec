@@ -9,17 +9,12 @@ class Extensions {
      * @var
      */
     private $extensions;
-    /**
-     * @var
-     */
-    private $namespaces;
 
     /**
      *
      */
     public function load(){
         $this->extensions = array();
-        $this->namespaces = array();
         $dh = @opendir(EXT);
         while (($filename = readdir ($dh))) {
             if($filename == '.' || $filename == '..') continue;
@@ -43,6 +38,11 @@ class Extensions {
         foreach($this->extensions as $ext){
             $ext->head_start();
         }
+    }
+    
+    function get($key){
+        if(in_array($key, $this->extensions)) return $this->extensions[$key];
+        return null;
     }
 
     /**

@@ -23,5 +23,5 @@
  */
 
 interface Admin extends Page{
-    public function allowed($user);
+    public function allowed($method,$user);
 }

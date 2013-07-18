@@ -64,7 +64,16 @@ class Router
 
     public function body(){
         $method = $this->method;
-        $this->class->$method(get('vars'));
+        if($this->class instanceof Page)
+            $this->class->$method(get('vars'));
+        else {
+            if($this->class->allowed($method, $_SESSION['user_permissions']))
+                $this->class->$method(get('vars'));
+            else {
+                $c = new error();
+                $c->_503($var);
+            }
+        }
     }
 
     public function redirect($url){

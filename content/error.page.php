@@ -23,4 +23,8 @@ class error implements Page{
         echo 'page not found';
     }
 
+    function _503($var){
+        echo 'you are in restricted zone';
+    }
+
 }

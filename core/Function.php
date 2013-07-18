@@ -1,28 +1,35 @@
 <?php
-if(!defined('xDEC')){
-    echo "f indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
 /**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 1:20 PM
+ * @param $key
+ * @return mixed
  */
 function get($key)
 {
     return Registry::get($key);
 }
 
+/**
+ * @param $key
+ * @param $value
+ * @return int
+ */
 function set($key, $value)
 {
     return Registry::set($key, $value);
 }
 
+/**
+ * @param $key
+ */
 function remove($key)
 {
     return Registry::remove($key);
 }
 
+/**
+ * @return bool
+ */
 function is_ssl() {
     if ( isset($_SERVER['HTTPS']) ) {
         if ( 'on' == strtolower($_SERVER['HTTPS']) )
@@ -35,6 +42,12 @@ function is_ssl() {
     return false;
 }
 
+/**
+ * @param $errno
+ * @param $errstr
+ * @param $errfile
+ * @param $errline
+ */
 function error_handler($errno, $errstr, $errfile, $errline){
     if (!(error_reporting() & $errno)) {
         return;
@@ -52,6 +65,11 @@ function error_handler($errno, $errstr, $errfile, $errline){
     }
 
 }
+
+/**
+ * @param $directory
+ * @return int
+ */
 function directory_size($directory) {
     $directorySize=0;
     if ($dh = @opendir($directory)) {
@@ -67,4 +85,8 @@ function directory_size($directory) {
     }
     @closedir($dh);
     return $directorySize;
+}
+
+function quot($str){
+    return '`'.$str.'`';
 }

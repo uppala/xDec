@@ -1,32 +1,19 @@
 <?php
-if(!defined('xDEC')){
-    //header("Location: http://".$_SERVER['HTTP_HOST']);
-    echo "script access deny";
-    exit;
-}
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:52 PM
- */
-
+if(!defined('xDEC')) exit;
+//TODO add advanced authentication techniques
+//TODO remove dependency on Database class
 /**
  * Class Auth
  * Provides basic authentication
  * @package xDec
  */
 class Auth {
-    /**
-     * @var string $table name of login table
-     */
-    /**
-     * @var string $field_user name of username column
-     */
-    /**
-     * @var string $field_pass name of password column
-     */
-    private static $table = 'login', $field_user, $field_pass;
-
+    private static $table = 'xdec_auth';
+    private static $fields = array(
+        'user_id' => 'id',
+        'username' => 'username',
+        'password' => 'password'
+    );
     /**
      * Simple login
      * @param string $user username
@@ -34,26 +21,23 @@ class Auth {
      * @return bool true for successful login else false
      */
     public function login($user, $pass){
-        self::$table = get('Modal')->getTable('login');
-        self::$field_user = get('Modal')->getField('login', 'user');
-        self::$field_pass = get('Modal')->getField('login', 'pass');
-        $user = get('Security')->clean($user);
-        $pass = md5($pass);
         get('Database')->select(
-            self::$table,
+            Auth::$table,
             array(
-                get('Modal')->getField('login','id'),
-                get('Modal')->getField('login','user'),
-                get('Modal')->getField('login','permissions'),
-                get('Modal')->getField('login','field')
-            ), self::$field_user."=\"$user\" AND ".self::$field_pass."=\"$pass\"");
-        if(is_object(get('Database')->result()) && get('Database')->result()->num_rows == 1){
-            $user_data = get('Database')->row();
-            set('logged_in', $user_data['id']);
-            get('Session')->setUser($user_data);
-            get('Database')->insert(get('Modal')->getTable('login_history'), get('Modal')->getAssoc('login_history',array($user_data['id'],session_id(),$_SERVER['REMOTE_ADDR'],$_SERVER['HTTP_USER_AGENT'])));
+                Auth::$fields['user_id']
+            ),
+            'WHERE '.quot(Auth::$fields['username'])."='?' AND ".quot(Auth::$fields['password'])."='?'",
+            array($user, sha1($pass)),
+            1
+        );
+        if(get('Database')->num_rows() == 1){
+            $row = get('Database')->row();
+            $_SESSION['xdec_user_id'] = $row[Auth::$fields['user_id']];
+            $_SESSION['username'] = $user;
             return true;
         }
+        unset($_SESSION['xdec_user_id']);
+        unset($_SESSION['username']);
         return false;
     }
 
@@ -61,28 +45,15 @@ class Auth {
      * logout function
      */
     public function logout(){
-        remove('logged_in');
-        get('Session')->unsetUser();
+        unset($_SESSION['xdec_user_id']);
+        unset($_SESSION['username']);
+        $_SESSION = array();
     }
 
     /**
      * @return bool true for logged in else false
      */
     public function logged(){
-        if(get('Session')->isUser()){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @return int user id for logged in user otherwise null
-     */
-    public function user(){
-        if($this->logged()){
-            $user = get('Session')->user();
-            return $user['id'];
-        }
-        return null;
+        return isset($_SESSION['xdec_user_id']);
     }
 }

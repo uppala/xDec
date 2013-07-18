@@ -1,21 +1,42 @@
 <?php
+if(!defined('xDEC')) exit;
 /**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 3:51 PM
+ * Class Mail
  */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
 class Mail {
+    /**
+     *
+     */
     function __construct()
     {
         $this->eol = '\r\n';
     }
 
+    /**
+     * @var string
+     */
+    /**
+     * @var string
+     */
+    /**
+     * @var string
+     */
+    /**
+     * @var string
+     */
+    /**
+     * @var string
+     */
     var $eol, $to, $message, $headers, $params;
 
+    /**
+     * @param $to
+     * @param $subject
+     * @param $message
+     * @param $from
+     * @param null $cc
+     * @param null $bcc
+     */
     function html_mail($to, $subject, $message, $from, $cc = null, $bcc = null){
         $this->to = $to;
         $this->message = $message;
@@ -28,6 +49,14 @@ class Mail {
         mail($to, $subject, $message, $this->headers);
     }
 
+    /**
+     * @param $to
+     * @param $subject
+     * @param $message
+     * @param $from
+     * @param null $cc
+     * @param null $bcc
+     */
     function mail($to, $subject, $message, $from, $cc = null, $bcc = null){
         $this->to = $to;
         $this->message = $message;

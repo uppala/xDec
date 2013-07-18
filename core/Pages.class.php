@@ -1,13 +1,6 @@
 <?php
-/**
- * Developer: Rahul Kadyan
- * Date: 16/05/13
- * Time: 3:40 PM
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
+//TODO  re-consider this class too
 class Pages {
     private function start_head(){
         echo '<!DOCTYPE html>
@@ -17,7 +10,7 @@ class Pages {
                     <title>';
                         get('Router')->title();
               echo '</title>';
-        get('Extension')->head_start();
+        get('Extensions')->head_start();
     }
 
     private function build_head(){
@@ -25,12 +18,12 @@ class Pages {
     }
 
     private function end_head(){
-        get('Extension')->head_end();
+        get('Extensions')->head_end();
     }
 
     private function start_body(){
         echo '<body>';
-        get('Extension')->body_start();
+        get('Extensions')->body_start();
     }
 
     private function build_body(){
@@ -38,7 +31,7 @@ class Pages {
     }
 
     private function end_body(){
-        get('Extension')->body_end();
+        get('Extensions')->body_end();
         echo '</body></html>';
     }
 

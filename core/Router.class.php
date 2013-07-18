@@ -1,14 +1,5 @@
 <?php
-/**
- * Developer: javascript Kadyan
- * Date: 12/05/13
- * Time: 12:50 PM
- * @dependency constant CONTENT and registry must be set first; uses functions get() and set() for accessing registry
- */
-if(!defined('xDEC')){
-    echo "c indirect access".$_SERVER['PHP_SELF'];
-exit;
-}
+if(!defined('xDEC')) exit;
 /**
  * Class Router
  * @package xDec
@@ -25,7 +16,7 @@ class Router
         $uri = substr($uri, strlen(DIR));
         $segments = explode('/',trim($uri, '/'));
         switch(count($segments)){
-            case 0: set('page', 'home'); set('request', 'index'); break;
+            case 0: set('page', HOME_CLASS); set('request', 'index'); break;
             case 1: if($segments[0] == ''){
                         set('page', HOME_CLASS); set('request', 'index');
                     } else {
@@ -33,8 +24,7 @@ class Router
                     } break;
             case 2: set('page', $segments[0]); set('request', $segments[1]); break;
             default: set('page', $segments[0]); set('request', $segments[1]);
-                        //TODO replace with security class once done
-                     set('vars', addslashes(strip_tags(htmlspecialchars(urldecode(substr($uri, strlen('/'.$segments[0].'/'.$segments[1].'/'))))))); break;
+                     set('vars', urldecode(substr($uri, strlen('/'.$segments[0].'/'.$segments[1].'/')))); break;
         }
         set('uri', BASE_URL.$_SERVER['REQUEST_URI']);
     }
@@ -74,7 +64,16 @@ class Router
 
     public function body(){
         $method = $this->method;
-        $this->class->$method(get('vars'));
+        if(in_array("Page", class_implements($this->class)))
+            $this->class->$method(get('vars'));
+        else {
+            if($this->class->allowed($method, $_SESSION['user_permissions']))
+                $this->class->$method(get('vars'));
+            else {
+                $c = new error();
+                $c->_503(get('vars'));
+            }
+        }
     }
 
     public function redirect($url){

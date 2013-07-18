@@ -1,15 +1,10 @@
 <?php
-/**
- * Developer: Rahul Kadyan
- * Date: 16/05/13
- * Time: 3:34 PM
- */
-
-//namespace x;
-
-
 class error implements Page{
-    function __head__()
+    function __meta__($var)
+    {
+    }
+
+    function __head__($var)
     {
 
     }
@@ -26,6 +21,10 @@ class error implements Page{
 
     function _404($var){
         echo 'page not found';
+    }
+
+    function _503($var){
+        echo 'you are in restricted zone';
     }
 
 }

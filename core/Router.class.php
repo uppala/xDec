@@ -55,7 +55,13 @@ class Router
     }
 
     public function head(){
-        $this->class->__head__(get('vars'));
+        $method = $this->method;
+        if(!in_array("Admin", class_implements($this->class)))
+            $this->class->__head__(get('vars'));
+        else {
+            if($this->class->allowed($method, $_SESSION['user_permissions']))
+                $this->class->__head__(get('vars'));
+        }
     }
 
     public function title(){
@@ -64,12 +70,15 @@ class Router
 
     public function body(){
         $method = $this->method;
-        if(in_array("Page", class_implements($this->class)))
+        if(!in_array("Admin", class_implements($this->class)))
+        {
             $this->class->$method(get('vars'));
+        }
         else {
             if($this->class->allowed($method, $_SESSION['user_permissions']))
                 $this->class->$method(get('vars'));
             else {
+                require_once(CONTENT.'error.page.php');
                 $c = new error();
                 $c->_503(get('vars'));
             }
